@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Seyi❤️❤️❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap" rel="stylesheet">
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background:#F5F4B3;
+      color:#D92E22;
+      font-family: "Playwrite GBS",cursive;
+    }
+    canvas{
+      border:2px black solid;
+      position: relative;
+      image-rendering: auto;
+    }
+    .info{
+      position: absolute;
+      top:30%;
+      left:12%;
+      background: transparent;
+      width:80%;
+    }
+    .head{
+      background: transparent;
+      font-size:2.5em;
+      text-decoration: underline
+    }
+    .info-text{
+      text-align:center;
+      line-height:30px;
+      background: transparent;
+      font-size: 1.5em;
+    }
+    .picture{
+      width:170px;
+      height:170px;
+      image-rendering: auto;
+      object-fit: cover ;
+      border-radius: 50%;
+      display:flex;
+      justify-content: center;
+      align-items:center;
+      margin:0 auto ;
+      margin-bottom:15px;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="canvas">
+    
+  </canvas>
+  <div class="info">
+      <img src="seyipic.jpg" alt="Seyi's picture" class="picture">
+    <h1 class="head">Oluwa Seyifunmi</h1>
+  <p class="info-text">Seyi, you’re such an amazing person. You’re kind-hearted, cheerful, and always supportive. Your positivity, warmth, and thoughtfulness make you such a blessing to be around.
+
+</p></div>
+</body>
+<script>
+  const canvas = document.getElementById('canvas');
+  var context = canvas.getContext('2d');
+  var main_height = window.innerHeight;
+  var main_width = window.innerWidth;
+  canvas.width = main_width;
+  canvas.height = main_height;
+  const colors = ["red","blue","green","yellow","orange"];
+  var size = (Math.random() * 20) + 30; 
+  var x = Math.random() * (main_width - size);
+  var y = Math.random() * (main_height - size);
+  var dx = (Math.random() - 0.5) * 10;
+  var dy = (Math.random() - 0.5) * 10;
+  function Square(x,y,dx,dy,size,colors){
+    this.x = x;
+    this.y = y;
+    this.dx = dx;
+    this.dy = dy;
+    this.size = size;
+    this.colors = colors;
+    this.draw = function(){
+      context.fillRect(this.x, this.y, this.size, this.size);
+      context.fillStyle = this.colors[Math.floor(Math.random() * colors.length )];
+    }
+    this.update = function(){
+       this.x += this.dx;
+    this.y += this.dy;
+    if(this.x + this.size > main_width || this.x < 0){
+      this.dx = -this.dx;
+    }
+    if(this.y + this.size > main_height || this.y < 0){
+      this.dy = -this.dy;
+    }
+    this.draw();
+    }
+  }
+  const squareArray = [];
+  for(var i = 0;i<50;i++){
+      var size = (Math.random() * 20) + 30; 
+  var x = Math.random() * (main_width - size);
+  var y = Math.random() * (main_height - size);
+  var dx = (Math.random() - 0.5) * 5;
+  var dy = (Math.random() - 0.5) * 5;
+      squareArray.push(new Square(x,y,dx,dy,size,colors));
+    }
+  function animate(){
+    context.clearRect(0,0, main_width,main_height);
+    requestAnimationFrame(animate);
+    for(var i = 0;i < squareArray.length;i++){
+      squareArray[i].update();
+    }
+  }
+  animate();
+</script>
+</html>
